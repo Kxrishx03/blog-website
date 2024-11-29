@@ -10,8 +10,17 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-// MongoDB Connection
-mongoose
-    .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch((err) => console.error('MongoDB connection error:', err));
+
+//IMPORT ROUTES
+
+
+//connect to db
+mongoose.connect(process.env.MONGO_URI,{
+    dbName: 'blogDB',
+  })
+.then(()=>{
+    console.log("Connection succesfull");
+    app.listen(PORT || 5000,()=>{
+        console.log("Running on : " + PORT);
+    })
+});
