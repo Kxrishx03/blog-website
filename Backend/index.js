@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const authRoutes = require('./routes/authRoutes');
+const postRoutes = require('./routes/postRoutes');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -11,10 +12,12 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 
-//IMPORT ROUTES
+//ROUTES
+app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
 
 
-//connect to db
+//CONNECT TO DB
 mongoose.connect(process.env.MONGO_URI,{
     dbName: 'blogDB',
   })
